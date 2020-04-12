@@ -5,7 +5,7 @@ const covid19ImpactEstimator = (data) => {
   const currentlyInfectedNormal = reportedCases * 10;
   const currentlyInfectedSevere = reportedCases * 50;
   const checkRequestedTime = () => {
-    let daysValue; 
+    let daysValue;
     if (periodType === 'weeks') {
       daysValue = timeToElapse * 7;
     } else if (periodType === 'months') {
@@ -17,14 +17,15 @@ const covid19ImpactEstimator = (data) => {
   };
 
   const getInfectionsByRequestedTimeNormal = (currentlyInfected) => {
-    return currentlyInfected * (2 ** Math.floor(checkRequestedTime() / 3));
-  }
-  const infectionsByRT_N = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
-  const infectionsByRT_S = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
+    const x = currentlyInfected * (2 ** Math.floor(checkRequestedTime() / 3));
+    return x;
+  };
+  const infectionsByRTN = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
+  const infectionsByRTS = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
   // Challenge 2
   const getSevereCaseByRequestedTime = (infectionsByRT) => infectionsByRT * (15 / 100);
-  const severeCaseByRT_N = getSevereCaseByRequestedTime(infectionsByRT_N);
-  const severeCaseByRT_S = getSevereCaseByRequestedTime(infectionsByRT_S);
+  const severeCaseByRTN = getSevereCaseByRequestedTime(infectionsByRTN);
+  const severeCaseByRTS = getSevereCaseByRequestedTime(infectionsByRTS);
   // get number of beds
   // let getHospitalBedsByRequestedTime = () =>  {
   //   // 1. get total hospital beds (THB)
@@ -35,8 +36,8 @@ const covid19ImpactEstimator = (data) => {
     data: input,
     impact: {
       currentlyInfected: currentlyInfectedNormal,
-      infectionsByRequestedTime: infectionsByRT_N,
-      severeCaseByRequestedTime: severeCaseByRT_N,
+      infectionsByRequestedTime: infectionsByRTN,
+      severeCaseByRequestedTime: severeCaseByRTN,
       hospitalBedsByRequestedTime: '',
       casesForICUByRequestedTime: '',
       casesForVentilatorsByRequestedTime: '', 
@@ -44,8 +45,8 @@ const covid19ImpactEstimator = (data) => {
     },
     severeImpact: {
       currentlyInfected: currentlyInfectedSevere,
-      infectionsByRequestedTime: infectionsByRT_S,
-      severeCaseByRequestedTime: severeCaseByRT_S,
+      infectionsByRequestedTime: infectionsByRTS,
+      severeCaseByRequestedTime: severeCaseByRTS,
       hospitalBedsByRequestedTime: '',
       casesForICUByRequestedTime: '',
       casesForVentilatorsByRequestedTime: '', 
