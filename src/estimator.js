@@ -30,7 +30,7 @@ const covid19ImpactEstimator = (data) => {
   };
 
   const getInfectionsByRequestedTime = (currentlyInfected) => {
-    const x = Math.trunc(currentlyInfected * (2 ** checkRequestedTime() / 3));
+    const x = currentlyInfected * (Math.trunc(2 ** checkRequestedTime() / 3));
     return x;
   };
 
