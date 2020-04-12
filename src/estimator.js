@@ -1,42 +1,3 @@
-let sampleData =
-  {
-    data: {
-      region: {
-        name: "Africa",
-        avgAge: 19.7,
-        avgDailyIncomeInUSD: 5,
-        avgDailyIncomePopulation: 0.71
-        },
-        periodType: "days",
-        timeToElapse: 58,
-        reportedCases: 674,
-        population: 66622705,
-        totalHospitalBeds: 1380614
-    },
-    estimate: {
-      impact: {
-        currentlyInfected: '',
-        infectionsByRequestedTime: '',
-        severeCaseByRequestedTime: '',
-        hospitalBedsByRequestedTime: '',
-        casesForICUByRequestedTime: '',
-        casesForVentilatorsByRequestedTime: '', 
-        dollarsInFlight: ''
-      },
-      severeImpact: {
-        currentlyInfected: '',
-        infectionsByRequestedTime: '',
-        severeCaseByRequestedTime: '',
-        hospitalBedsByRequestedTime: '',
-        casesForICUByRequestedTime: '',
-        casesForVentilatorsByRequestedTime: '', 
-        dollarsInFlight: ''
-      }
-    }
-  }
-
-
-
 const covid19ImpactEstimator = (data) => {
   let input = data
   let { periodType, timeToElapse, reportedCases, population, totalHospitalBeds } = input;
@@ -72,10 +33,9 @@ const covid19ImpactEstimator = (data) => {
   
   // get number of beds
   let getHospitalBedsByRequestedTime = () =>  {
-    
+    // 1. get total hospital beds (THB)
   }
-  // 1. get total available beds (TAB)
-  // 2. get 90% if the TAB
+  // 2. get 90% if the THB
   // 3. 
 
   return {
