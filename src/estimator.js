@@ -1,35 +1,30 @@
 const covid19ImpactEstimator = (data) => {
-  
   const input = data;
-
-  const { periodType, timeToElapse, reportedCases, totalHospitalBeds } = input;
-  
+  const { periodType, timeToElapse, reportedCases } = input;
   // Challenge 1
   const currentlyInfectedNormal = reportedCases * 10;
   const currentlyInfectedSevere = reportedCases * 50;
-
   const checkRequestedTime = () => {
     let daysValue; 
-    if (periodType == 'weeks') {
+    if (periodType === 'weeks') {
       daysValue = timeToElapse * 7;
     } else if (periodType == 'months') {
       daysValue = timeToElapse * 30;
     } else {
       daysValue = timeToElapse;
     }
-    
     return daysValue;
   }
 
-  const getInfectionsByRequestedTimeNormal = (currentlyInfected) => currentlyInfected * (2 ** Math.floor(checkRequestedTime()/3))
+  const getInfectionsByRequestedTimeNormal = (currentlyInfected) => currentlyInfected * (2 ** Math.floor(checkRequestedTime()/3));
 
   const infectionsByRequestedTimeNormal = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
   const infectionsByRequestedTimeSevere = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
   
   // Challenge 2
-  const getSevereCaseByRequestedTime = (infectionsByRequestedTime) => infectionsByRequestedTime * (15/100)
-  const severeCaseByRequestedTimeNormal = getSevereCaseByRequestedTime(infectionsByRequestedTimeNormal)
-  const severeCaseByRequestedTimeSevere = getSevereCaseByRequestedTime(infectionsByRequestedTimeSevere) 
+  const getSevereCaseByRequestedTime = (infectionsByRequestedTime) => infectionsByRequestedTime * (15/100);
+  const severeCaseByRequestedTimeNormal = getSevereCaseByRequestedTime(infectionsByRequestedTimeNormal);
+  const severeCaseByRequestedTimeSevere = getSevereCaseByRequestedTime(infectionsByRequestedTimeSevere);
 
   
   // get number of beds
@@ -59,7 +54,7 @@ const covid19ImpactEstimator = (data) => {
       casesForVentilatorsByRequestedTime: '', 
       dollarsInFlight: ''
     } 
-  }
+  };
 };
 
 export default covid19ImpactEstimator;
