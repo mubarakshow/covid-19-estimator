@@ -1,6 +1,10 @@
 const covid19ImpactEstimator = (data) => {
   const input = data;
   const {
+    region: {
+      avgDailyIncomeInUSD,
+      avgDailyIncomePopulation
+    },
     periodType,
     timeToElapse,
     reportedCases,
@@ -31,19 +35,44 @@ const covid19ImpactEstimator = (data) => {
   const infectionsByRTS = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
 
   // Challenge 2
-  const getSevereCaseByRequestedTime = (infectionsByRT) => infectionsByRT * (0.15);
+  const getSevereCaseByRequestedTime = (infectionsByRT) => {
+    const x = Math.trunc(infectionsByRT * 0.15);
+    return x;
+  };
+
   const severeCaseByRTN = getSevereCaseByRequestedTime(infectionsByRTN);
   const severeCaseByRTS = getSevereCaseByRequestedTime(infectionsByRTS);
 
   // get number of beds
   const getHospitalBedsByRequestedTime = () => {
-    const n = (Math.round(totalHospitalBeds * 0.35)) - severeCaseByRTN;
-    const s = (Math.round(totalHospitalBeds * 0.35)) - severeCaseByRTS;
+    const n = (Math.trunc(totalHospitalBeds * 0.35) - severeCaseByRTN);
+    const s = (Math.trunc(totalHospitalBeds * 0.35) - severeCaseByRTS);
     return {
       normal: n,
       severe: s
     };
   };
+
+  // Challenge 3
+  // casesForICUByRequestedTime
+  const getCasesForICUByRequestedTime = (infectionsByRT) => {
+    const x = Math.round(infectionsByRT * 0.05);
+    return x;
+  };
+
+  // casesForVentilatorsByRequestedTime
+  const getCasesForVentilatorsByRequestedTime = (infectionsByRT) => {
+    const x = Math.round(infectionsByRT * 0.02);
+    return x;
+  };
+
+  // dollarsInFlight
+  const getDollarsInFlight = (infectionsByRT) => {
+    const x = Math.trunc((infectionsByRT * avgDailyIncomePopulation
+      * avgDailyIncomeInUSD) / timeToElapse);
+    return x;
+  };
+
 
   return {
     data: input,
@@ -52,18 +81,18 @@ const covid19ImpactEstimator = (data) => {
       infectionsByRequestedTime: infectionsByRTN,
       severeCaseByRequestedTime: severeCaseByRTN,
       hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime().normal,
-      casesForICUByRequestedTime: '',
-      casesForVentilatorsByRequestedTime: '',
-      dollarsInFlight: ''
+      casesForICUByRequestedTime: getCasesForICUByRequestedTime(infectionsByRTN),
+      casesForVentilatorsByRequestedTime: getCasesForVentilatorsByRequestedTime(infectionsByRTN),
+      dollarsInFlight: getDollarsInFlight(infectionsByRTN)
     },
     severeImpact: {
       currentlyInfected: currentlyInfectedSevere,
       infectionsByRequestedTime: infectionsByRTS,
       severeCaseByRequestedTime: severeCaseByRTS,
       hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime().severe,
-      casesForICUByRequestedTime: '',
-      casesForVentilatorsByRequestedTime: '',
-      dollarsInFlight: ''
+      casesForICUByRequestedTime: getCasesForICUByRequestedTime(infectionsByRTS),
+      casesForVentilatorsByRequestedTime: getCasesForVentilatorsByRequestedTime(infectionsByRTS),
+      dollarsInFlight: getDollarsInFlight(infectionsByRTS)
     }
   };
 };
