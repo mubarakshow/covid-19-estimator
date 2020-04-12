@@ -44,13 +44,9 @@ const covid19ImpactEstimator = (data) => {
   const severeCaseByRTS = getSevereCaseByRequestedTime(infectionsByRTS);
 
   // get number of beds
-  const getHospitalBedsByRequestedTime = () => {
-    const n = Math.trunc(totalHospitalBeds * 0.35 - severeCaseByRTN);
-    const s = Math.trunc(totalHospitalBeds * 0.35 - severeCaseByRTS);
-    return {
-      normal: n,
-      severe: s
-    };
+  const getHospitalBedsByRequestedTime = (severeCaseByRT) => {
+    const x = Math.trunc(totalHospitalBeds * 0.35 - severeCaseByRT);
+    return x;
   };
 
   // Challenge 3
@@ -80,7 +76,7 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: currentlyInfectedNormal,
       infectionsByRequestedTime: infectionsByRTN,
       severeCaseByRequestedTime: severeCaseByRTN,
-      hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime().normal,
+      hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime(severeCaseByRTN),
       casesForICUByRequestedTime: getCasesForICUByRequestedTime(infectionsByRTN),
       casesForVentilatorsByRequestedTime: getCasesForVentilatorsByRequestedTime(infectionsByRTN),
       dollarsInFlight: getDollarsInFlight(infectionsByRTN)
@@ -89,7 +85,7 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: currentlyInfectedSevere,
       infectionsByRequestedTime: infectionsByRTS,
       severeCaseByRequestedTime: severeCaseByRTS,
-      hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime().severe,
+      hospitalBedsByRequestedTime: getHospitalBedsByRequestedTime(severeCaseByRTS),
       casesForICUByRequestedTime: getCasesForICUByRequestedTime(infectionsByRTS),
       casesForVentilatorsByRequestedTime: getCasesForVentilatorsByRequestedTime(infectionsByRTS),
       dollarsInFlight: getDollarsInFlight(infectionsByRTS)
