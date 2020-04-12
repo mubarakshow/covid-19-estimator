@@ -31,7 +31,7 @@ const covid19ImpactEstimator = (data) => {
   //   // 1. get total hospital beds (THB)
   // }
   // 2. get 90% if the THB
-  // 3. 
+  // 3.
   return {
     data: input,
     impact: {
@@ -40,7 +40,7 @@ const covid19ImpactEstimator = (data) => {
       severeCaseByRequestedTime: severeCaseByRTN,
       hospitalBedsByRequestedTime: '',
       casesForICUByRequestedTime: '',
-      casesForVentilatorsByRequestedTime: '', 
+      casesForVentilatorsByRequestedTime: '',
       dollarsInFlight: ''
     },
     severeImpact: {
@@ -49,9 +49,9 @@ const covid19ImpactEstimator = (data) => {
       severeCaseByRequestedTime: severeCaseByRTS,
       hospitalBedsByRequestedTime: '',
       casesForICUByRequestedTime: '',
-      casesForVentilatorsByRequestedTime: '', 
+      casesForVentilatorsByRequestedTime: '',
       dollarsInFlight: ''
-    } 
+    }
   };
 };
 
