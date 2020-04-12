@@ -17,20 +17,22 @@ const covid19ImpactEstimator = (data) => {
   const currentlyInfectedNormal = reportedCases * 10;
   const currentlyInfectedSevere = reportedCases * 50;
 
-  const checkRequestedTime = () => {
+  const checkRequestedTime = (periodTypee, timeToElapsee) => {
     let daysValue;
-    if (periodType === 'weeks') {
-      daysValue = timeToElapse * 7;
-    } else if (periodType === 'months') {
-      daysValue = timeToElapse * 30;
+    if (periodTypee === 'weeks') {
+      daysValue = timeToElapsee * 7;
+    } else if (periodTypee === 'months') {
+      daysValue = timeToElapsee * 30;
     } else {
-      daysValue = timeToElapse;
+      daysValue = timeToElapsee;
     }
     return daysValue;
   };
 
   const getInfectionsByRequestedTime = (currentlyInfected) => {
-    const x = currentlyInfected * (Math.trunc(2 ** checkRequestedTime() / 3));
+    const x = currentlyInfected * (Math.trunc(
+      2 ** checkRequestedTime(periodType, timeToElapse) / 3
+    ));
     return x;
   };
 
