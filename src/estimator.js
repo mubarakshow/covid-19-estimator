@@ -1,5 +1,6 @@
 const covid19ImpactEstimator = (data) => {
   const input = data;
+  console.log(input);
   const {
     region: {
       avgDailyIncomeInUSD,
@@ -11,9 +12,11 @@ const covid19ImpactEstimator = (data) => {
     // population,
     totalHospitalBeds
   } = input;
+
   // Challenge 1
   const currentlyInfectedNormal = reportedCases * 10;
   const currentlyInfectedSevere = reportedCases * 50;
+
   const checkRequestedTime = () => {
     let daysValue;
     if (periodType === 'weeks') {
@@ -26,13 +29,13 @@ const covid19ImpactEstimator = (data) => {
     return daysValue;
   };
 
-  const getInfectionsByRequestedTimeNormal = (currentlyInfected) => {
-    const x = currentlyInfected * (2 ** Math.floor(checkRequestedTime() / 3));
+  const getInfectionsByRequestedTime = (currentlyInfected) => {
+    const x = Math.trunc(currentlyInfected * (2 ** checkRequestedTime() / 3));
     return x;
   };
 
-  const infectionsByRTN = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
-  const infectionsByRTS = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
+  const infectionsByRTN = getInfectionsByRequestedTime(currentlyInfectedNormal);
+  const infectionsByRTS = getInfectionsByRequestedTime(currentlyInfectedSevere);
 
   // Challenge 2
   const getSevereCaseByRequestedTime = (infectionsByRT) => {
