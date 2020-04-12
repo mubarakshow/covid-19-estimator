@@ -45,8 +45,8 @@ const covid19ImpactEstimator = (data) => {
 
   // get number of beds
   const getHospitalBedsByRequestedTime = () => {
-    const n = (Math.trunc(totalHospitalBeds * 0.35) - severeCaseByRTN);
-    const s = (Math.trunc(totalHospitalBeds * 0.35) - severeCaseByRTS);
+    const n = Math.trunc(totalHospitalBeds * 0.35 - severeCaseByRTN);
+    const s = Math.trunc(totalHospitalBeds * 0.35 - severeCaseByRTS);
     return {
       normal: n,
       severe: s
@@ -56,13 +56,13 @@ const covid19ImpactEstimator = (data) => {
   // Challenge 3
   // casesForICUByRequestedTime
   const getCasesForICUByRequestedTime = (infectionsByRT) => {
-    const x = Math.round(infectionsByRT * 0.05);
+    const x = Math.trunc(infectionsByRT * 0.05);
     return x;
   };
 
   // casesForVentilatorsByRequestedTime
   const getCasesForVentilatorsByRequestedTime = (infectionsByRT) => {
-    const x = Math.round(infectionsByRT * 0.02);
+    const x = Math.trunc(infectionsByRT * 0.02);
     return x;
   };
 
