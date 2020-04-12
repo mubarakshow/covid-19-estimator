@@ -1,11 +1,12 @@
 const covid19ImpactEstimator = (data) => {
-  let input = data
-  let { periodType, timeToElapse, reportedCases, population, totalHospitalBeds } = input;
+  
+  const input = data;
 
+  const { periodType, timeToElapse, reportedCases, totalHospitalBeds } = input;
   
   // Challenge 1
-  let currentlyInfectedNormal = reportedCases * 10;
-  let currentlyInfectedSevere = reportedCases * 50;
+  const currentlyInfectedNormal = reportedCases * 10;
+  const currentlyInfectedSevere = reportedCases * 50;
 
   const checkRequestedTime = () => {
     let daysValue; 
@@ -20,21 +21,21 @@ const covid19ImpactEstimator = (data) => {
     return daysValue;
   }
 
-  let getInfectionsByRequestedTimeNormal = (currentlyInfected) => currentlyInfected * (2 ** Math.floor(checkRequestedTime()/3))
+  const getInfectionsByRequestedTimeNormal = (currentlyInfected) => currentlyInfected * (2 ** Math.floor(checkRequestedTime()/3))
 
-  let infectionsByRequestedTimeNormal = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
-  let infectionsByRequestedTimeSevere = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
+  const infectionsByRequestedTimeNormal = getInfectionsByRequestedTimeNormal(currentlyInfectedNormal);
+  const infectionsByRequestedTimeSevere = getInfectionsByRequestedTimeNormal(currentlyInfectedSevere);
   
   // Challenge 2
-  let getSevereCaseByRequestedTime = (infectionsByRequestedTime) => infectionsByRequestedTime * (15/100)
-  let severeCaseByRequestedTimeNormal = getSevereCaseByRequestedTime(infectionsByRequestedTimeNormal)
-  let severeCaseByRequestedTimeSevere = getSevereCaseByRequestedTime(infectionsByRequestedTimeSevere) 
+  const getSevereCaseByRequestedTime = (infectionsByRequestedTime) => infectionsByRequestedTime * (15/100)
+  const severeCaseByRequestedTimeNormal = getSevereCaseByRequestedTime(infectionsByRequestedTimeNormal)
+  const severeCaseByRequestedTimeSevere = getSevereCaseByRequestedTime(infectionsByRequestedTimeSevere) 
 
   
   // get number of beds
-  let getHospitalBedsByRequestedTime = () =>  {
-    // 1. get total hospital beds (THB)
-  }
+  // let getHospitalBedsByRequestedTime = () =>  {
+  //   // 1. get total hospital beds (THB)
+  // }
   // 2. get 90% if the THB
   // 3. 
 
