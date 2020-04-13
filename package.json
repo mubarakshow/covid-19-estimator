@@ -8,6 +8,7 @@
     "lint": "eslint ./src/"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "on-covid-19": "^0.1.3"
   },
   "devDependencies": {

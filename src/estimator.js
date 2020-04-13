@@ -1,6 +1,6 @@
 const covid19ImpactEstimator = (data) => {
   const input = data;
-  console.log(input);
+  // console.log(input);
   const {
     region: {
       avgDailyIncomeInUSD,
@@ -17,21 +17,23 @@ const covid19ImpactEstimator = (data) => {
   const currentlyInfectedNormal = reportedCases * 10;
   const currentlyInfectedSevere = reportedCases * 50;
 
-  const checkRequestedTime = (periodTypee, timeToElapsee) => {
+  const checkRequestedTime = () => {
     let daysValue;
-    if (periodTypee === 'weeks') {
-      daysValue = timeToElapsee * 7;
-    } else if (periodTypee === 'months') {
-      daysValue = timeToElapsee * 30;
+    if (periodType === 'weeks') {
+      daysValue = timeToElapse * 7;
+    } else if (periodType === 'months') {
+      daysValue = timeToElapse * 30;
     } else {
-      daysValue = timeToElapsee;
+      daysValue = timeToElapse;
     }
+    console.log('daysValue: ', daysValue);
     return daysValue;
   };
 
   const getInfectionsByRequestedTime = (currentlyInfected) => {
+    const days = checkRequestedTime();
     const x = currentlyInfected * (
-      2 ** (Math.trunc(checkRequestedTime(periodType, timeToElapse) / 3)));
+      2 ** (Math.trunc(days / 3)));
     return x;
   };
 
@@ -49,8 +51,9 @@ const covid19ImpactEstimator = (data) => {
 
   // get number of beds
   const getHospitalBedsByRequestedTime = (severeCaseByRT) => {
-    const x = Math.trunc((totalHospitalBeds * 0.35) - severeCaseByRT);
-    return x;
+    const x = (totalHospitalBeds * (35 / 100));
+    const y = Math.trunc(x - severeCaseByRT);
+    return y;
   };
 
   // Challenge 3
@@ -68,13 +71,13 @@ const covid19ImpactEstimator = (data) => {
 
   // dollarsInFlight
   const getDollarsInFlight = (infectionsByRT) => {
-    const x = Math.trunc((infectionsByRT * avgDailyIncomePopulation
-      * avgDailyIncomeInUSD) / timeToElapse);
-    return x;
+    const x = infectionsByRT * avgDailyIncomePopulation * avgDailyIncomeInUSD;
+    const y = Math.trunc(x / checkRequestedTime());
+    return y;
   };
 
 
-  return {
+  const lala = {
     data: input,
     impact: {
       currentlyInfected: currentlyInfectedNormal,
@@ -95,6 +98,9 @@ const covid19ImpactEstimator = (data) => {
       dollarsInFlight: getDollarsInFlight(infectionsByRTS)
     }
   };
+
+  console.log(lala);
+  return lala;
 };
 
 export default covid19ImpactEstimator;
