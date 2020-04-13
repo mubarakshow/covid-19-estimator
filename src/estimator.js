@@ -1,6 +1,6 @@
 const covid19ImpactEstimator = (data) => {
   const input = data;
-  console.log(input);
+  // console.log(input);
   const {
     region: {
       avgDailyIncomeInUSD,
@@ -30,9 +30,8 @@ const covid19ImpactEstimator = (data) => {
   };
 
   const getInfectionsByRequestedTime = (currentlyInfected) => {
-    const x = currentlyInfected * (Math.trunc(
-      2 ** checkRequestedTime(periodType, timeToElapse) / 3
-    ));
+    const x = currentlyInfected * (
+      2 ** (Math.trunc(checkRequestedTime(periodType, timeToElapse) / 3)));
     return x;
   };
 
