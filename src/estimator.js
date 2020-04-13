@@ -1,6 +1,6 @@
 const covid19ImpactEstimator = (data) => {
   const input = data;
-  // console.log(input);
+  console.log(input);
   const {
     region: {
       avgDailyIncomeInUSD,
