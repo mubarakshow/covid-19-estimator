@@ -26,7 +26,7 @@ const covid19ImpactEstimator = (data) => {
     } else {
       daysValue = timeToElapse;
     }
-    console.log('daysValue: ', daysValue);
+    // console.log('daysValue: ', daysValue);
     return daysValue;
   };
 
@@ -77,7 +77,7 @@ const covid19ImpactEstimator = (data) => {
   };
 
 
-  const lala = {
+  const responseData = {
     data: input,
     impact: {
       currentlyInfected: currentlyInfectedNormal,
@@ -99,8 +99,8 @@ const covid19ImpactEstimator = (data) => {
     }
   };
 
-  console.log(lala);
-  return lala;
+  // console.log(lala);
+  return responseData;
 };
 
 export default covid19ImpactEstimator;
